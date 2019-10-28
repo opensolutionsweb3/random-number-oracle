@@ -55,7 +55,7 @@ class GameController extends Controller
 
     private function sendtoBlockchain($data)
     {
-        $wk   = new WavesKit();
+        $wk   = new WavesKit('T');
         $seed = 'your seed here';
         $dApp = 'your dApp address';
 
