@@ -1,8 +1,39 @@
 # Random number oracle
 
-## Used
-[WavesKit](https://github.com/deemru/WavesKit)
-[phpseclib/phpseclib](https://packagist.org/packages/phpseclib/phpseclib)
-[laravel](https://laravel.com/)
+Random number oracle - это Оракул для генерации детерминированных цифровых подписей для получения случайных чисел на блокчейне. Он включает в себя две функции: [sign](https://github.com/opensolutionsweb3/random-number-oracle/blob/046d1db98d73685e54668095f42650ddb81a7b70/GameController.php#L11 ) и [sendtoBlockchain](https://github.com/opensolutionsweb3/random-number-oracle/blob/046d1db98d73685e54668095f42650ddb81a7b70/GameController.php#L56)
 
-### Please dont forget remove example seed, dApp address
+## ```Sign($data)```
+
+### Description
+Подписывает входящие данные тремя приватными RSA ключами и возвращает массив создержащий message и 3 RSA подписи.
+
+### Parameters
+```$rsa->setHash('sha256');``` - чтобы использовать другой метод хеширования замените `sha256` на собственный
+
+### Require
+* ```(string) $data ``` - message for sign (tx.id)
+
+### Return
+* ```array``` : array includes message and 3 RSA signs
+> `message` returns as string, `sign` returns as base64 encoded string
+
+## ```sendtoBlockchain($data)```
+Creates Invoke transaction with arguments and broadcast it to the blockchain
+
+### Parameters
+```$seed = 'your seed here';``` - change `your seed here` on your own seed phrase
+```$dApp = 'your dApp address';``` - change `your dApp address` on your dApp address
+```tx = $wk->txInvokeScript($dApp, 'dApp method', $args, $payments);``` - change `dApp method` on your @Callable function name
+
+### Require
+ ```(array) $data``` - result of Sign function
+
+### Return
+```tx.id|error```
+> `tx.id` if transaction was broadcasted, `error` on failure
+
+# Used libraries
+* [WavesKit](https://github.com/deemru/WavesKit) : WavesKit documentation
+* [phpseclib/phpseclib](https://packagist.org/packages/phpseclib/phpseclib)
+* [laravel](https://laravel.com/)
+ 
