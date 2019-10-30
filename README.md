@@ -15,7 +15,7 @@ Signs incoming data with three RSA private keys and returns an array containing 
 
 ### Return
 * ```array``` : array includes message and 3 RSA signs
-> `message` returns as string, `sign` returns as base64 encoded string
+> `message` returns as string, `sign` returns as byte array
 
 ## ```sendtoBlockchain($data)```
 Creates Invoke transaction with arguments and broadcast it to the blockchain
