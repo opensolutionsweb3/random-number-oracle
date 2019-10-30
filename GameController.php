@@ -19,7 +19,7 @@ class GameController extends Controller
             $rsa->loadKey($privateKey);
             $rsa->setHash('sha256');
             $rsa->setSignatureMode(RSA::SIGNATURE_PKCS1);
-            $sign[$index] = base64_encode($rsa->sign($data));
+            $sign[$index] = $rsa->sign($data);
         }
 
 
@@ -61,9 +61,9 @@ class GameController extends Controller
 
         $args = [
             $data[0]['data'],
-            $data[0]['sign'],
-            $data[1]['sign'],
-            $data[2]['sign'],
+            [ $data[0]['sign'] ],
+            [ $data[1]['sign'] ],
+            [ $data[2]['sign'] ],
         ];
 
         $payments = [];
